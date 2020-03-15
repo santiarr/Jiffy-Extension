@@ -1,0 +1,33 @@
+html{
+    height:600px;
+    width:474.4px;
+
+    
+}
+
+body{
+    height:600px;
+    width:474.4px;
+    background-color:#121212;
+
+}
+
+.header{
+    height:40px;
+    width:455px;
+    margin-top: 0px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    display: block;
+
+}
+
+.logo{
+    height:26px;
+    width:127px;
+}
+
+
+
+
