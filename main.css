@@ -9,7 +9,8 @@ body{
     height:600px;
     width:474.4px;
     background-color:#121212;
-
+    margin-left: 0px;
+    margin-top: 0px;
 }
 
 .header{
@@ -24,9 +25,10 @@ body{
 
 }
 
-.logo{
+#logo{
     height:26px;
     width:127px;
+    margin-top: 13px;
 }
 
 
