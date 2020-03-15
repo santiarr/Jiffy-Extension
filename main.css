@@ -20,7 +20,7 @@ body{
 
 .sep{ 
     width: 300px; 
-    height: 96px; 
+    height: 60px; 
     overflow-x: hidden;
     overflow-y: hidden; 
     text-align: center; 
@@ -51,7 +51,7 @@ body{
     text-align: center; 
     padding: 20px;
     background-color: #121212; 
-    width: 434.4px; 
+    width: 474.4px; 
     height: 504px; 
 }
 html::-webkit-scrollbar{
@@ -62,4 +62,60 @@ html::-webkit-scrollbar{
 body::-webkit-scrollbar{
     display: none;
     
+}
+
+
+* {
+    box-sizing: border-box;
+  }
+  
+  /* Style the search field */
+  form.example input[type=text] {
+    padding: 10px;
+    margin-left: 10px;
+    font-size: 17px;
+    border: 1px solid grey;
+    float: left;
+    width: 415px;
+    height: 40px;
+    background: #f1f1f1;
+    margin-bottom: 36px;
+  }
+
+  
+ 
+  
+  /* Clear floats */
+  form.example::after {
+    content: "";
+    clear: both;
+    display: table;
+
+  }
+
+  .searchBackground {
+    position: absolute;
+    height: 40px;
+    width: 40px;
+    z-index: -1;
+    margin-left: 425px;
+    background: linear-gradient(45deg, rgb(153, 51, 255) 0%, rgb(255, 102, 102) 100%);
+}
+
+.searchBackground::before {
+    background-image: linear-gradient(45deg, rgb(153, 51, 255) 0%, rgb(255, 102, 102) 50%, rgb(153, 51, 255) 100%);
+    background-size: 400%;
+    content: "";
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    animation: 2s linear 0s infinite normal none running fNRXvU;
+    margin-bottom: 36px;
+
+}
+
+.searchIcon{
+    z-index: 1;
 }
