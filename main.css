@@ -1,17 +1,31 @@
 html{
     height:600px;
-    width:474.4px;
-
-    
+    width:auto;
+    overflow: hidden;
+    padding:0px;
+    margin-right:0px;
 }
 
 body{
     height:600px;
-    width:474.4px;
+    width:auto;
     background-color:#121212;
     margin-left: 0px;
     margin-top: 0px;
+    overflow: hidden;
+    padding:0px;
+    margin-right: 0px;
 }
+
+
+.sep{ 
+    width: 300px; 
+    height: 96px; 
+    overflow-x: hidden;
+    overflow-y: hidden; 
+    text-align: center; 
+    padding: 20px;
+    } 
 
 .header{
     height:40px;
@@ -20,17 +34,32 @@ body{
     margin-right: 10px;
     margin-bottom: 10px;
     margin-left: 10px;
-    display: block;
     position: fixed;
-
 }
 
-#logo{
+.header #logo{
     height:26px;
     width:127px;
     margin-top: 13px;
 }
 
 
+.scrollableArea{
+    color:white;
+    overflow-x: hidden;
+    overflow-y: scroll; 
+    text-align: center; 
+    padding: 20px;
+    background-color: #121212; 
+    width: 434.4px; 
+    height: 504px; 
+}
+html::-webkit-scrollbar{
+    display: none;
 
+}
 
+body::-webkit-scrollbar{
+    display: none;
+    
+}
