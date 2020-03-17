@@ -1,18 +1,27 @@
 <!DOCTYPE html>
 <head>
     <link href="main.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <html>
     <body>
-        <div class="header">
-            <div id='logo'>
-                <img style="width:126px; height:27px;" src="static/JIFFY.png">
+       <div id="header">
+         <div id="logo"><img src="static/JIFFY.png" width="126" height="27"></div>
+         <div id="gifs-text" class="nav-text"><strong style="height:40px;">GIFs</strong></div>
+         <div id="stickers-text" class="nav-text"><strong style="height:40px;">Stickers</strong></div>
+         <div id="saved-button" class="nav-text"><strong style="height:40px;">Saved</strong></div>
+       </div>
+        
+        <form class="example">
+            <input type="text" placeholder="Search GIPHY" name="search">
+            <div class="searchBackground">
             </div>
-        </div>
+            <div class='searchIcon'><img style='margin-left:6px; margin-top:6px;'src="static/search-icon.png" width="26" height="26"></img></div>
+          </form>
 
-        <div class="sep">
+        <div class="scrollableArea">
+            <div id='test'></div>
         </div>
-
-        <div class="scrollableArea"></div>
+        <script type="text/javascript" src="popup.js"></script>
     </body>
 </html>
