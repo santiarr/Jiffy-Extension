@@ -7,6 +7,7 @@
 <html>
 
 <body>
+    <!--Header with logo and navbar elements-->
     <div id="header">
         <div id="logo"><img src="static/JIFFY.png" width="126" height="27"></div>
             <div id="navbar"> 
@@ -23,7 +24,14 @@
                     <div class='not-clicked' id='saved'></div></div>
             </div>
     </div>
-
+    
+    <div width="455" class="toggle">
+        <div class="toggle-text-first" id="first-clicked">Trending</div><div class="toggle-text-second" id="second-not-clicked">Reactions</div><div class="toggle-text-third" id="third-not-clicked">Hello</div><div class="toggle-text-fourth" id="fourth-not-clicked">Goodbye</div><div class="toggle-text-fifth" id="fifth-not-clicked">Thank You</div><div class="toggle-text-sixth" id="sixth-not-clicked">Happy Bi </div>
+        <div id="arrow-svg">
+            <svg width="15px" style="position:relative;"height="15px" viewBox="0 0 15 30" version="1.1" xmlns="http://www.w3.org/2000/svg"><g stroke="none" fill="none"><g transform="translate(-1017.000000, -82.000000)" fill="white"><g><g transform="translate(1.000000, 27.000000)"><polygon points="1031 70.0000018 1030.1866 69.0556352 1018.01759 55 1016 56.888726 1027.35562 70.0000018 1016 83.111274 1018.01759 85 1030.1866 70.9443648"></polygon></g></g></g></g></svg>
+        </div>
+    </div>
+    <!--Search Bar-->
     <form class="example">
         <input type="text" placeholder="Search GIPHY" name="search">
         <div class="searchBackground">
@@ -32,6 +40,7 @@
                 height="26"></img></div>
     </form>
 
+    <!--Gif results-->
     <div class="scrollableArea">
         <div id='test'></div>
     </div>
