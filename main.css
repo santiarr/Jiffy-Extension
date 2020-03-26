@@ -210,9 +210,10 @@ body::-webkit-scrollbar{
     align-items: center;
     position: absolute;
     width: 474.4px;
-    top: -364px;
+    height: 40px;
     left: 0px;
     right: 0px;
+    top: 95px;
     bottom: 0px;
     margin-bottom: 3px;
     -webkit-box-pack: justify;
@@ -220,10 +221,15 @@ body::-webkit-scrollbar{
     overflow: hidden;
 }
 
+.toggle-text{
+    position:relative;
+    display: inline-block;
+   
+}
 
 
 /*toggle elements are clicked*/
-.toggle-text-first#first-clicked{
+.toggle-text#first-clicked{
     color: white;
     font-family: interface, "Helvetica Neue", helvetica, sans-serif;
     cursor: pointer;
@@ -231,7 +237,7 @@ body::-webkit-scrollbar{
     font-weight: bold;
 }
 
-.toggle-text-second#second-clicked{
+.toggle-text#second-clicked{
     color: white;
     font-family: interface, "Helvetica Neue", helvetica, sans-serif;
     cursor: pointer;
@@ -239,7 +245,7 @@ body::-webkit-scrollbar{
     font-weight: bold;
 }
 
-.toggle-text-third#third-clicked{
+.toggle-text#third-clicked{
     color: white;
     font-family: interface, "Helvetica Neue", helvetica, sans-serif;
     cursor: pointer;
@@ -247,7 +253,7 @@ body::-webkit-scrollbar{
     font-weight: bold;
 }
 
-.toggle-text-fourth#fourth-clicked{
+.toggle-text#fourth-clicked{
     color: white;
     font-family: interface, "Helvetica Neue", helvetica, sans-serif;
     cursor: pointer;
@@ -255,7 +261,7 @@ body::-webkit-scrollbar{
     font-weight: bold;
 }
 
-.toggle-text-fifth#fifth-clicked{
+.toggle-text#fifth-clicked{
     color: white;
     font-family: interface, "Helvetica Neue", helvetica, sans-serif;
     cursor: pointer;
@@ -263,7 +269,7 @@ body::-webkit-scrollbar{
     font-weight: bold;
 }
 
-.toggle-text-sixth#sixth-clicked{
+.toggle-text#sixth-clicked{
     color: white;
     font-family: interface, "Helvetica Neue", helvetica, sans-serif;
     cursor: pointer;
@@ -272,7 +278,7 @@ body::-webkit-scrollbar{
 }
 
 /*toggle elements are not clicked*/
-.toggle-text-first#first-not-clicked{
+.toggle-text#first-not-clicked{
     color: #5c5c5c;
     font-family: interface, "Helvetica Neue", helvetica, sans-serif;
     cursor: pointer;
@@ -280,7 +286,7 @@ body::-webkit-scrollbar{
     font-weight: bold;
 }
 
-.toggle-text-second#second-not-clicked{
+.toggle-text#second-not-clicked{
     color: #5c5c5c;
     font-family: interface, "Helvetica Neue", helvetica, sans-serif;
     cursor: pointer;
@@ -288,7 +294,7 @@ body::-webkit-scrollbar{
     font-weight: bold;
 }
 
-.toggle-text-third#third-not-clicked{
+.toggle-text#third-not-clicked{
     color: #5c5c5c;
     font-family: interface, "Helvetica Neue", helvetica, sans-serif;
     cursor: pointer;
@@ -296,7 +302,7 @@ body::-webkit-scrollbar{
     font-weight: bold;
 }
 
-.toggle-text-fourth#fourth-not-clicked{
+.toggle-text#fourth-not-clicked{
     color: #5c5c5c;
     font-family: interface, "Helvetica Neue", helvetica, sans-serif;
     cursor: pointer;
@@ -304,7 +310,7 @@ body::-webkit-scrollbar{
     font-weight: bold;
 }
 
-.toggle-text-fifth#fifth-not-clicked{
+.toggle-text#fifth-not-clicked{
     color: #5c5c5c;
     font-family: interface, "Helvetica Neue", helvetica, sans-serif;
     cursor: pointer;
@@ -313,7 +319,7 @@ body::-webkit-scrollbar{
 }
 
 
-.toggle-text-sixth#sixth-not-clicked{
+.toggle-text#sixth-not-clicked{
     color: #5c5c5c;
     font-family: interface, "Helvetica Neue", helvetica, sans-serif;
     cursor: pointer;
@@ -321,7 +327,7 @@ body::-webkit-scrollbar{
     font-weight: bold;
 }
 
-#arrow-svg{
+.arrow-svg#right{
     display: flex;
     position: absolute;
     padding-left: 50px;
@@ -330,11 +336,24 @@ body::-webkit-scrollbar{
     cursor: pointer;
     left: 408.6px;
     background: linear-gradient(90deg, rgba(18, 18, 18, 0) 0%, rgb(18, 18, 18) 60%);
-    animation: 0.2s ease-in-out 0s 1 normal none running eMLfYp;
+    animation: 0.2s ease-in-out 0s 1 normal none running arrowright;
+}
+
+.arrow-svg#left{
+    display: flex;
+    position: absolute;
+    padding-left: 50px;
+    transform: scaleX(-1);
+    -webkit-box-align: center;
+    align-items: center;
+    cursor: pointer;
+    left: 0px;
+    background: linear-gradient(90deg, rgba(18, 18, 18, 0) 0%, rgb(18, 18, 18) 60%);
+    animation: 0.2s ease-in-out 0s 1 normal none running arrowleft;
 }
 
 
-@keyframes eMLfYp {
+@keyframes arrowright {
     
     0% {
         opacity: 0;
@@ -344,3 +363,15 @@ body::-webkit-scrollbar{
         opacity: 1;
     }
 }
+
+@keyframes arrowleft {
+    
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+

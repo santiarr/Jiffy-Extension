@@ -1,71 +1,114 @@
 
-function firstClicked(){
-  /*Change style of clicked element*/
-  document.getElementsByClassName('toggle-text-first')[0].id='first-clicked'
-  /*Change style of elements that are not clicked*/
-  document.getElementsByClassName('toggle-text-second')[0].id='second-not-clicked'
-  document.getElementsByClassName('toggle-text-third')[0].id='third-not-clicked'
-  document.getElementsByClassName('toggle-text-fourth')[0].id="fourth-not-clicked"
-  document.getElementsByClassName('toggle-text-fifth')[0].id="fifth-not-clicked"
-  document.getElementsByClassName('toggle-text-sixth')[0].id="sixth-not-clicked"
+let clickedPlaces = ['first-clicked', 'second-clicked', 'third-clicked', 'fourth-clicked', 'fifth-clicked', 'sixth-clicked'];
+let unclickedPlaces = ['first-not-clicked', 'second-not-clicked', 'third-not-clicked', 'fourth-not-clicked', 'fifth-not-clicked', 'sixth-not-clicked']
+let homeTexts = ['Trending', 'Reactions', 'Hello', 'Goodbye', 'Thank You', 'Happy Bi'];
+let nextTexts = ['hank You', 'Happy Birthday','Weird', 'Working', 'Food', '..........'];
+let homeNextSelected = 0
+let nextTextSelected = 1
+
+
+/*This function gets called when a toggle choice gets clicked*/
+
+function toggleClicked(place){
+  /*unclick all elements*/
+  for (var i=0; i<6; i++){
+    document.getElementsByClassName('toggle-text')[i].id=unclickedPlaces[i]
+  }
+  /*Click element*/
+  document.getElementsByClassName('toggle-text')[place].id=clickedPlaces[place]
+  if(document.getElementsByClassName('arrow-svg')[0].id==='right'){
+    homeNextSelected = place;
+  }else if(document.getElementsByClassName('arrow-svg')[0].id==='left'){
+    nextTextSelected = place;
+  }
 }
 
-function secondClicked(){
-  /*Change style of clicked element*/
-  document.getElementsByClassName('toggle-text-second')[0].id='second-clicked'
-  /*Change style of elements that are not clicked*/
-  document.getElementsByClassName('toggle-text-first')[0].id='first-not-clicked'
-  document.getElementsByClassName('toggle-text-third')[0].id='third-not-clicked'
-  document.getElementsByClassName('toggle-text-fourth')[0].id="fourth-not-clicked"
-  document.getElementsByClassName('toggle-text-fifth')[0].id="fifth-not-clicked"
-  document.getElementsByClassName('toggle-text-sixth')[0].id="sixth-not-clicked"
+
+/*This function gets called when the toggle arrow is clicked*/
+
+function toggleAnimation(){
+    let direction = document.getElementsByClassName('arrow-svg')[0].id;
+    var toggleTexts = document.querySelectorAll(".toggle-text");
+    var textsbe = document.getElementsByClassName('toggle-text');
+    
+    /*Checks which way the arrow is facing*/
+    if (direction==='left'){
+  
+      for (text in textsbe){
+      /*makes sure that the text value is not the string 'length' but is actually a number*/
+      if (text !== 'length'){
+        /*unclick elements*/
+        textsbe[text].id=unclickedPlaces[text];
+        /*Changes the toggle text to the home toggle text*/
+        textsbe[text].innerHTML=homeTexts[text];
+      }
+      }
+      
+
+      for (var i = 0; i < 6; i++) {
+      var toggleText = toggleTexts[i];
+      
+      toggleText.keyframes = [{
+          opacity: 0,
+          transform: "translate3d(" + 0 + "px, 0px, 0px)"
+      }, {
+          opacity: 0,
+          transform: "translate3d(" + 0 + "px, 7px, 0px)"
+      }, {
+          opacity: 1,
+          transform: "translate3d(" + 0 + "px, 0px, 0px)"
+      }];
+      
+      toggleText.animProps = {
+          duration: 1000 + 10*i,
+          easing: "ease-out",
+          iterations: 1
+      }
+      
+      var animationPlayer = toggleText.animate(toggleText.keyframes, toggleText.animProps);
+      document.getElementsByClassName('arrow-svg')[0].id ='right'
+      textsbe[homeNextSelected].id=clickedPlaces[homeNextSelected];
+      }
+
+
+
+
+    }else if (direction=='right'){
+      for (text in textsbe){
+        if (text !== 'length'){
+          textsbe[text].id=unclickedPlaces[text];
+          textsbe[text].innerHTML=nextTexts[text];
+        }
+        }
+
+      for (var i = 0; i < 6; i++) {
+      var toggleText = toggleTexts[i];
+      
+      toggleText.keyframes = [{
+          opacity: 0,
+          transform: "translate3d(" + 0 + "px, 0px, 0px)"
+      }, {
+          opacity: 0,
+          transform: "translate3d(" + 0 + "px, 7px, 0px)"
+      }, {
+          opacity: 1,
+          transform: "translate3d(" + 0 + "px, 0px, 0px)"
+      }];
+      
+      toggleText.animProps = {
+          duration: 1000 + 10*i,
+          easing: "ease-out",
+          iterations: 1
+      }
+  
+  var animationPlayer = toggleText.animate(toggleText.keyframes, toggleText.animProps);
+  }
+  document.getElementsByClassName('arrow-svg')[0].id ='left'
+  textsbe[nextTextSelected].id=clickedPlaces[nextTextSelected];
+  textsbe[5].innerHTML=`<div class='no-select' style="color: #121212"> ${nextTexts[6]}<div>`
 }
 
-
-function thirdClicked(){
-  /*Change style of clicked element*/
-  document.getElementsByClassName('toggle-text-third')[0].id='third-clicked'
-  /*Change style of elements that are not clicked*/
-  document.getElementsByClassName('toggle-text-first')[0].id='first-not-clicked'
-  document.getElementsByClassName('toggle-text-second')[0].id='second-not-clicked'
-  document.getElementsByClassName('toggle-text-fourth')[0].id="fourth-not-clicked"
-  document.getElementsByClassName('toggle-text-fifth')[0].id="fifth-not-clicked"
-  document.getElementsByClassName('toggle-text-sixth')[0].id="sixth-not-clicked"
 }
-
-function fourthClicked(){
-  /*Change style of clicked element*/
-  document.getElementsByClassName('toggle-text-fourth')[0].id="fourth-clicked"
-  /*Change style of elements that are not clicked*/
-  document.getElementsByClassName('toggle-text-first')[0].id='first-not-clicked'
-  document.getElementsByClassName('toggle-text-second')[0].id='second-not-clicked'
-  document.getElementsByClassName('toggle-text-third')[0].id='third-not-clicked'
-  document.getElementsByClassName('toggle-text-fifth')[0].id="fifth-not-clicked"
-  document.getElementsByClassName('toggle-text-sixth')[0].id="sixth-not-clicked"
-}
-
-function fifthClicked(){
-  /*Change style of clicked element*/
-  document.getElementsByClassName('toggle-text-fifth')[0].id="fifth-clicked"
-  /*Change style of elements that are not clicked*/
-  document.getElementsByClassName('toggle-text-first')[0].id='first-not-clicked'
-  document.getElementsByClassName('toggle-text-second')[0].id='second-not-clicked'
-  document.getElementsByClassName('toggle-text-third')[0].id='third-not-clicked'
-  document.getElementsByClassName('toggle-text-fourth')[0].id="fourth-not-clicked"
-  document.getElementsByClassName('toggle-text-sixth')[0].id="sixth-not-clicked"
-}
-
-function sixthClicked(){
-  /*Change style of clicked element*/
-  document.getElementsByClassName('toggle-text-sixth')[0].id="sixth-clicked"
-  /*Change style of elements that are not clicked*/
-  document.getElementsByClassName('toggle-text-first')[0].id='first-not-clicked'
-  document.getElementsByClassName('toggle-text-second')[0].id='second-not-clicked'
-  document.getElementsByClassName('toggle-text-third')[0].id='third-not-clicked'
-  document.getElementsByClassName('toggle-text-fourth')[0].id="fourth-not-clicked"
-  document.getElementsByClassName('toggle-text-fifth')[0].id="fifth-not-clicked"
-}
-
 
 function gifClicked(){
   /* Turn text 'GIFs'green and render green rectangle.*/
@@ -102,11 +145,14 @@ document.getElementById('saved-text').addEventListener('click', savedClicked);
 
 
 /*Check if toggle elements were clicked*/
-document.getElementsByClassName('toggle-text-first')[0].addEventListener('click', firstClicked)
-document.getElementsByClassName('toggle-text-second')[0].addEventListener('click', secondClicked)
-document.getElementsByClassName('toggle-text-third')[0].addEventListener('click', thirdClicked)
-document.getElementsByClassName('toggle-text-fourth')[0].addEventListener('click', fourthClicked)
-document.getElementsByClassName('toggle-text-fifth')[0].addEventListener('click', fifthClicked)
-document.getElementsByClassName('toggle-text-sixth')[0].addEventListener('click', sixthClicked)
+
+document.getElementsByClassName('toggle-text')[0].addEventListener('click', function(){toggleClicked(0)});
+document.getElementsByClassName('toggle-text')[1].addEventListener('click', function(){toggleClicked(1)});
+document.getElementsByClassName('toggle-text')[2].addEventListener('click', function(){toggleClicked(2)});
+document.getElementsByClassName('toggle-text')[3].addEventListener('click', function(){toggleClicked(3)});
+document.getElementsByClassName('toggle-text')[4].addEventListener('click', function(){toggleClicked(4)});
+document.getElementsByClassName('toggle-text')[5].addEventListener('click', function(){toggleClicked(5)});
 
 
+  
+document.getElementsByClassName('arrow-svg')[0].addEventListener('click', toggleAnimation);
