@@ -1,3 +1,5 @@
+
+/*Style the main pop up*/
 html{
     height:600px;
     width:auto;
@@ -17,15 +19,13 @@ body{
     margin-right: 0px;
 }
 
-#test{
-    color: white;
-}
 
-
+/*Style header and navbar elements */
 
 #header{
     display: flex;
     margin-bottom: 10px;
+    z-index: -1;
 }
 
 .nav-text{
@@ -33,8 +33,10 @@ body{
     font-family: interface, "Helvetica Neue", helvetica, sans-serif;
     font-size: 15px;
     margin-top: 19px;
-    margin-left: 10px;
+    margin-left: 19px;
     height: 27px;
+    cursor: pointer;
+    font-weight: bold;
 }
 
 #logo{
@@ -44,6 +46,83 @@ body{
     height: 27px;
 }
 
+#navbar{
+    margin-left: -34px;
+    display: flex;
+}
+
+.clicked#gifs{
+    background-color: #00ff99;
+    width: 44.43px; 
+    height: 4px; 
+    margin-left: -6px;
+    margin-top: -37px;
+    margin-right: 15px;
+    
+}
+
+
+.clicked#stickers{
+    background-color: #00ff99;
+    width: 73.71px; 
+    height: 4px; 
+    margin-top: -37px;
+    margin-left: -8px;
+   
+}
+
+
+.clicked#saved{
+    background-color: #00ff99;
+    width: 52.43px; 
+    height: 4px; 
+    margin-left: -2px;
+    margin-top: -37px;
+    
+}
+
+.not-clicked#stickers{
+    background-color:#121212;
+    width: 73.71px; 
+    height: 3px; 
+    margin-top: -37px;
+    margin-left: -8px;
+}
+
+.not-clicked#gifs{
+    background-color:#121212;
+    width: 44.43px; 
+    height: 3px; 
+    margin-left: -6px;
+    margin-top: -37px;
+    margin-right: 15px;
+}
+
+
+.not-clicked#saved{
+    background-color:#121212;
+    width: 52.43px; 
+    height: 3px; 
+    margin-left: -2px;
+    margin-top: -37px;
+    
+}
+
+
+#stickers-text{
+    margin-left: 19px;
+}
+
+#saved-text{
+    margin-left: 25px;
+}
+
+.searchIcon{
+    z-index: 1;
+}
+
+
+/*Style the gifs area*/
 .scrollableArea{
     color:white;
     overflow-x: hidden;
@@ -53,6 +132,8 @@ body{
     width: 474.4px; 
     height: 504px; 
 }
+
+/*Remove scroll ar from main popup*/
 html::-webkit-scrollbar{
     display: none;
 
@@ -100,9 +181,9 @@ body::-webkit-scrollbar{
     z-index: -1;
     background: linear-gradient(227deg, #9933ff, #ff6666, #9933ff, #ff6666);
     background-size: 800% 800%;
-    -webkit-animation: AnimationName 14s ease infinite;
-    -moz-animation: AnimationName 14s ease infinite;
-    animation: AnimationName 14s ease infinite;
+    -webkit-animation: AnimationName 12s ease infinite;
+    -moz-animation: AnimationName 12s ease infinite;
+    animation: AnimationName 12s ease infinite;
 }
 
 @-webkit-keyframes AnimationName {
@@ -121,8 +202,185 @@ body::-webkit-scrollbar{
     100%{background-position:0% 87%}
 }
 
-.searchIcon{
-    z-index: 1;
+
+.toggle{
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    position: absolute;
+    width: 474.4px;
+    height: 40px;
+    left: 0px;
+    right: 0px;
+    top: 95px;
+    bottom: 0px;
+    margin-bottom: 3px;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    overflow: hidden;
+}
+
+.toggle-text{
+    position:relative;
+    display: inline-block;
+   
+}
+
+
+/*toggle elements are clicked*/
+.toggle-text#first-clicked{
+    color: white;
+    font-family: interface, "Helvetica Neue", helvetica, sans-serif;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.toggle-text#second-clicked{
+    color: white;
+    font-family: interface, "Helvetica Neue", helvetica, sans-serif;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.toggle-text#third-clicked{
+    color: white;
+    font-family: interface, "Helvetica Neue", helvetica, sans-serif;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.toggle-text#fourth-clicked{
+    color: white;
+    font-family: interface, "Helvetica Neue", helvetica, sans-serif;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.toggle-text#fifth-clicked{
+    color: white;
+    font-family: interface, "Helvetica Neue", helvetica, sans-serif;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.toggle-text#sixth-clicked{
+    color: white;
+    font-family: interface, "Helvetica Neue", helvetica, sans-serif;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+/*toggle elements are not clicked*/
+.toggle-text#first-not-clicked{
+    color: #5c5c5c;
+    font-family: interface, "Helvetica Neue", helvetica, sans-serif;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.toggle-text#second-not-clicked{
+    color: #5c5c5c;
+    font-family: interface, "Helvetica Neue", helvetica, sans-serif;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.toggle-text#third-not-clicked{
+    color: #5c5c5c;
+    font-family: interface, "Helvetica Neue", helvetica, sans-serif;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.toggle-text#fourth-not-clicked{
+    color: #5c5c5c;
+    font-family: interface, "Helvetica Neue", helvetica, sans-serif;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.toggle-text#fifth-not-clicked{
+    color: #5c5c5c;
+    font-family: interface, "Helvetica Neue", helvetica, sans-serif;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+
+.toggle-text#sixth-not-clicked{
+    color: #5c5c5c;
+    font-family: interface, "Helvetica Neue", helvetica, sans-serif;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.arrow-svg#right{
+    display: flex;
+    position: absolute;
+    padding-left: 50px;
+    -webkit-box-align: center;
+    align-items: center;
+    cursor: pointer;
+    left: 408.6px;
+    background: linear-gradient(90deg, rgba(18, 18, 18, 0) 0%, rgb(18, 18, 18) 60%);
+    animation: 0.2s ease-in-out 0s 1 normal none running arrowright;
+}
+
+.arrow-svg#left{
+    display: flex;
+    position: absolute;
+    padding-left: 50px;
+    transform: scaleX(-1);
+    -webkit-box-align: center;
+    align-items: center;
+    cursor: pointer;
+    left: 0px;
+    background: linear-gradient(90deg, rgba(18, 18, 18, 0) 0%, rgb(18, 18, 18) 60%);
+    animation: 0.2s ease-in-out 0s 1 normal none running arrowleft;
+}
+
+
+@keyframes arrowright {
+    
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes arrowleft {
+    
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+
+.main-container { 
+    display:flex;
+    width: 474.4px;
+    height: 500px;
+    align-content: center;
+    margin-left:10px;
 }
 
 #gifs-grid{
@@ -155,10 +413,3 @@ body::-webkit-scrollbar{
     margin-top:10px;
 }
 
-.main-container { 
-    display:flex;
-    width: 474.4px;
-    height: 1565.7px;
-    align-content: center;
-    margin-left:10px;
-}

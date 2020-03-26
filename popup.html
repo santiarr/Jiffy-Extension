@@ -1,40 +1,65 @@
 <!DOCTYPE html>
+
 <head>
     <link href="main.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/p5@1.0.0/lib/p5.js"></script>
-    <script src="giphyapi.js"></script>
 </head>
 <html>
-    <body>
-       <div id="header">
-         <div id="logo"><img src="static/JIFFY.png" width="126" height="27"></div>
-         <div id="gifs-text" class="nav-text"><strong style="height:40px;">GIFs</strong></div>
-         <div id="stickers-text" class="nav-text"><strong style="height:40px;">Stickers</strong></div>
-         <div id="saved-button" class="nav-text"><strong style="height:40px;">Saved</strong></div>
-       </div>
 
-        <form class="example">
-            <input type="text" id="txt" placeholder="Search JIPHY" name="txt">
-            <!-- <input id="searchGifs" type="button" value="search"> -->
-            <div class="searchBackground">
+<body>
+    <!--Header with logo and navbar elements-->
+    <div id="header">
+        <div id="logo"><img src="static/JIFFY.png" width="126" height="27"></div>
+            <div id="navbar"> 
+                <div id="gifs-text" class="nav-text">
+                    <strong style="height:40px;  color:#00ff99;">GIFs</strong>
+                    <div class="clicked" id="gifs"></div>
+                </div>
+                <div id="stickers-text" class="nav-text">
+                    <strong style="height:40px;">Stickers</strong>
+                    <div class='not-clicked' id="stickers"></div>
+                </div>
+                <div id="saved-text" class="nav-text">
+                    <strong style="height:40px;">Saved</strong>
+                    <div class='not-clicked' id='saved'></div></div>
             </div>
-            <div class='searchIcon'> 
-              <img id="searchGifs" style='margin-left:6px; margin-top:6px;'src="static/search-icon.png" width="26" height="26"></img> 
+    </div>
+    <!--Toggle-->
+    <div width="455" class="toggle">
+        <div class="toggle-text" id="first-clicked">Trending</div>
+        <div class="toggle-text" id="second-not-clicked">Reactions</div>
+        <div class="toggle-text" id="third-not-clicked">Hello</div>
+        <div class="toggle-text" id="fourth-not-clicked">Goodbye</div>
+        <div class="toggle-text" id="fifth-not-clicked">Thank You</div>
+        <div class="toggle-text" id="sixth-not-clicked">Happy Bi </div>
+        <div class="arrow-svg" id="right">
+            <svg width="15px" style="position:relative;"height="15px" viewBox="0 0 15 30" version="1.1" xmlns="http://www.w3.org/2000/svg"><g stroke="none" fill="none"><g transform="translate(-1017.000000, -82.000000)" fill="white"><g><g transform="translate(1.000000, 27.000000)"><polygon points="1031 70.0000018 1030.1866 69.0556352 1018.01759 55 1016 56.888726 1027.35562 70.0000018 1016 83.111274 1018.01759 85 1030.1866 70.9443648"></polygon></g></g></g></g></svg>
+        </div>
+    </div>
+    <!--Search Bar-->
+    <form class="example">
+        <input type="text" placeholder="Search JIPHY" id="txt" name="search">
+        <div class="searchBackground">
+        </div>
+        <div class='searchIcon'>
+            <img id="searchGifs" style='margin-left:6px; margin-top:6px;' src="static/search-icon.png" width="26"
+                height="26"></img>
             </div>
-          </form>
+    </form>
 
-        <div class="scrollableArea">
-          <div class="main-container">
+    <!--Gif results-->
+    <div class="scrollableArea">
+        <div class="main-container">
             <div class='container' id='gifs-grid'>
             </div>
             <div class='container2' id='gifs-grid2'>
             </div>
             <div class='container3' id='gifs-grid3'>
             </div>
+       <!-- <div id='test'></div> --> 
     </div>
-            </div>
-        </div>
-        <script type="text/javascript" src="popup.js"></script>
-    </body>
+    </div>
+    <script type="text/javascript" src="popup.js"></script>
+</body>
+
 </html>
