@@ -31,7 +31,7 @@ body{
 .nav-text{
     color: #a6a6a6;
     font-family: interface, "Helvetica Neue", helvetica, sans-serif;
-    font-size: 18px;
+    font-size: 15px;
     margin-top: 19px;
     margin-left: 10px;
     height: 27px;
@@ -49,7 +49,6 @@ body{
     overflow-x: hidden;
     overflow-y: scroll; 
     text-align: center; 
-    padding: 20px;
     background-color: #121212; 
     width: 474.4px; 
     height: 504px; 
@@ -126,4 +125,40 @@ body::-webkit-scrollbar{
     z-index: 1;
 }
 
+#gifs-grid{
+    display: inline-flex;
+    flex-direction: column;
+    width: 155px;
+    align-content: center;
 
+}
+
+#gifs-grid2{
+    display: flex;
+    flex-direction: column;
+    width: 155x;
+    align-content: center;
+} 
+
+#gifs-grid3{
+    display: flex;
+    flex-direction: column;
+    width: 155px;
+    margin-right: -20px;
+    align-content: center;
+
+} 
+
+
+.gif {
+    margin-right: 10px;
+    margin-top:10px;
+}
+
+.main-container { 
+    display:flex;
+    width: 474.4px;
+    height: 1565.7px;
+    align-content: center;
+    margin-left:10px;
+}

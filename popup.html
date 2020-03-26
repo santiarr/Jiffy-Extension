@@ -2,6 +2,8 @@
 <head>
     <link href="main.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.0.0/lib/p5.js"></script>
+    <script src="giphyapi.js"></script>
 </head>
 <html>
     <body>
@@ -11,16 +13,27 @@
          <div id="stickers-text" class="nav-text"><strong style="height:40px;">Stickers</strong></div>
          <div id="saved-button" class="nav-text"><strong style="height:40px;">Saved</strong></div>
        </div>
-        
+
         <form class="example">
-            <input type="text" placeholder="Search GIPHY" name="search">
+            <input type="text" id="txt" placeholder="Search JIPHY" name="txt">
+            <!-- <input id="searchGifs" type="button" value="search"> -->
             <div class="searchBackground">
             </div>
-            <div class='searchIcon'><img style='margin-left:6px; margin-top:6px;'src="static/search-icon.png" width="26" height="26"></img></div>
+            <div class='searchIcon'> 
+              <img id="searchGifs" style='margin-left:6px; margin-top:6px;'src="static/search-icon.png" width="26" height="26"></img> 
+            </div>
           </form>
 
         <div class="scrollableArea">
-            <div id='test'></div>
+          <div class="main-container">
+            <div class='container' id='gifs-grid'>
+            </div>
+            <div class='container2' id='gifs-grid2'>
+            </div>
+            <div class='container3' id='gifs-grid3'>
+            </div>
+    </div>
+            </div>
         </div>
         <script type="text/javascript" src="popup.js"></script>
     </body>
