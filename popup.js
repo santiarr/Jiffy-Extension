@@ -15,9 +15,25 @@ loadTrending(60, false);
 
 function toggleClicked(place) {
   /*unclick all elements*/
-  if (place===0){
+  if (place===0 && (document.getElementById("first-not-clicked").innerHTML==="Trending" || document.getElementById("first-clicked").innerHTML==="Trending")){
     loadTrending(60, true);
   }
+  if (place===1 ){
+    searchGif(document.getElementById('second-not-clicked').innerHTML, 60, true);
+  }
+  if (place===2){
+    searchGif(document.getElementById('third-not-clicked').innerHTML, 60, true);
+  }
+  if (place===3){
+    searchGif(document.getElementById('fourth-not-clicked').innerHTML, 60, true);
+  }
+  if (place===4){
+    searchGif(document.getElementById('fifth-not-clicked').innerHTML, 60, true);
+  }
+  if (place===5){
+    searchGif(document.getElementById('sixth-not-clicked').innerHTML, 60, true);
+  }
+
   for (var i = 0; i < 6; i++) {
     document.getElementsByClassName('toggle-text')[i].id = unclickedPlaces[i]
   }
@@ -46,7 +62,6 @@ function toggleAnimation() {
 
   /*Checks which way the arrow is facing*/
   if (direction === 'left') {
-
     for (text in textsbe) {
       /*makes sure that the text value is not the string 'length' but is actually a number*/
       if (text !== 'length') {
@@ -81,6 +96,20 @@ function toggleAnimation() {
       var animationPlayer = toggleText.animate(toggleText.keyframes, toggleText.animProps);
       document.getElementsByClassName('arrow-svg')[0].id = 'right'
       textsbe[homeNextSelected].id = clickedPlaces[homeNextSelected];
+      
+    if (homeNextSelected===0){
+      loadTrending(60, true);
+    } else if (homeNextSelected===1 ){
+      searchGif(document.getElementById('second-clicked').innerHTML, 60, true);
+    } else if (homeNextSelected===2){
+      searchGif(document.getElementById('third-clicked').innerHTML, 60, true);
+    } else if (homeNextSelected===3){
+      searchGif(document.getElementById('fourth-clicked').innerHTML, 60, true);
+    } else if (homeNextSelected===4){
+      searchGif(document.getElementById('fifth-clicked').innerHTML, 60, true);
+    } else if (homeNextSelected===5){
+      searchGif(document.getElementById('sixth-clicked').innerHTML, 60, true);
+    }
     }
 
 
@@ -118,6 +147,19 @@ function toggleAnimation() {
     }
     document.getElementsByClassName('arrow-svg')[0].id = 'left'
     textsbe[nextTextSelected].id = clickedPlaces[nextTextSelected];
+    if (nextTextSelected===0){
+      searchGif(document.getElementById('first-clicked').innerHTML, 60, true)
+    } else if (nextTextSelected===1 ){
+      searchGif(document.getElementById('second-clicked').innerHTML, 60, true);
+    } else if (nextTextSelected===2){
+      searchGif(document.getElementById('third-clicked').innerHTML, 60, true);
+    } else if (nextTextSelected===3){
+      searchGif(document.getElementById('fourth-clicked').innerHTML, 60, true);
+    } else if (nextTextSelected===4){
+      searchGif(document.getElementById('fifth-clicked').innerHTML, 60, true);
+    } else if (nextTextSelected===5){
+      searchGif(document.getElementById('sixth-clicked').innerHTML, 60, true);
+    }
     textsbe[5].innerHTML = `<div class='no-select' style="color: #121212"> ${nextTexts[6]}<div>`
   }
 
@@ -264,7 +306,3 @@ document.getElementsByClassName('toggle-text')[5].addEventListener('click', func
 
 
 document.getElementsByClassName('arrow-svg')[0].addEventListener('click', toggleAnimation);
-
-
-
-
