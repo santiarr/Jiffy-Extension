@@ -6,13 +6,18 @@ let nextTexts = ['hank You', 'Happy Birthday', 'Weird', 'Working', 'Food', '....
 let homeNextSelected = 0;
 let nextTextSelected = 1;
 let timesCalled = 1;
-let error = 0;
 let currentKeyword = 'hello';
+
+
+loadTrending(60, false);
 
 /*This function gets called when a toggle choice gets clicked*/
 
 function toggleClicked(place) {
   /*unclick all elements*/
+  if (place===0){
+    loadTrending(60, true);
+  }
   for (var i = 0; i < 6; i++) {
     document.getElementsByClassName('toggle-text')[i].id = unclickedPlaces[i]
   }
@@ -25,6 +30,12 @@ function toggleClicked(place) {
   }
 }
 
+async function loadTrending(limit, clear) {
+  let searchUrl = `https://api.giphy.com/v1/gifs/trending?api_key=x01GDnDrRCOp9kXRPTeazB7wqCyeB5Sq&limit=${limit}&rating=R`
+  let result = await fetch(searchUrl);
+  let jsonResult = await result.json();
+  renderTrending(jsonResult, clear)
+}
 
 /*This function gets called when the toggle arrow is clicked*/
 
@@ -140,26 +151,22 @@ function savedClicked() {
 }
 
 async function searchGif(keyword, limit, clear) {
-  console.log("limit is: "+ limit)
   let searchUrl = `https://api.giphy.com/v1/gifs/search?api_key=tJWi8tEPTSzGXx9YJZqiXT9QFc5M0wsS&q=${keyword}&limit=${limit}&offset=0&rating=R&lang=en`
   let result = await fetch(searchUrl);
   let jsonResult = await result.json();
   renderImage(jsonResult, clear, keyword)
 }
 
-console.log('search called from outside ');
-searchGif(currentKeyword, 60, false);
+
 
 var base = 0;
 
 function renderImage(imageData, clear, keyword) {
 
-  let offSet = 20; 
-  
-  if(clear === true){
-    document.getElementsByClassName('scrollableArea')[0].innerHTML='<div class="main-container"><div class="container" id="gifs-grid"></div><div class="container2" id="gifs-grid2"></div><div class="container3" id="gifs-grid3"></div>'
-    console.log(keyword);
-    console.log(imageData);
+  let offSet = 20;
+
+  if (clear === true) {
+    document.getElementsByClassName('scrollableArea')[0].innerHTML = '<div class="main-container"><div class="container" id="gifs-grid"></div><div class="container2" id="gifs-grid2"></div><div class="container3" id="gifs-grid3"></div>'
     timesCalled = 1;
     base = 0;
     currentKeyword = keyword;
@@ -173,25 +180,52 @@ function renderImage(imageData, clear, keyword) {
     document.getElementById('gifs-grid2').innerHTML += `<div class="gif">
   <img id=${i} src=${imageData.data[i].images.fixed_height_small.url} width="145"> </div>`
   }
-  base+=offSet
+  base += offSet
   for (var i = base; i < base + offSet; i++) {
     document.getElementById('gifs-grid3').innerHTML += `<div class="gif">
   <img id=${i} src=${imageData.data[i].images.fixed_height_small.url} width="145" > </div>`
   }
-  base+=offSet
-  timesCalled+=1;
- 
+  base += offSet
+  timesCalled += 1;
+
 }
 
+function renderTrending(imageData, clear) {
 
-/*check if search button was clicke*/
+  let offSet = 20;
+
+  if (clear === true) {
+    document.getElementsByClassName('scrollableArea')[0].innerHTML = '<div class="main-container"><div class="container" id="gifs-grid"></div><div class="container2" id="gifs-grid2"></div><div class="container3" id="gifs-grid3"></div>'
+    timesCalled = 1;
+    base = 0;
+    currentKeyword=null;
+  }
+
+  for (var i = base; i < base + offSet; i++) {
+    document.getElementById('gifs-grid').innerHTML += `<div class="gif">
+  <img id=${i} src=${imageData.data[i].images.fixed_height_small.url} width="145" > </div>`
+  }
+  base += offSet
+  for (var i = base; i < base + offSet; i++) {
+    document.getElementById('gifs-grid2').innerHTML += `<div class="gif">
+  <img id=${i} src=${imageData.data[i].images.fixed_height_small.url} width="145"> </div>`
+  }
+  base += offSet
+  for (var i = base; i < base + offSet; i++) {
+    document.getElementById('gifs-grid3').innerHTML += `<div class="gif">
+  <img id=${i} src=${imageData.data[i].images.fixed_height_small.url} width="145" > </div>`
+  }
+  base += offSet
+  timesCalled += 1;
+
+}
+
+/*check if search button was clicked*/
 document.getElementById("searchGifs").addEventListener("click", function () {
-  console.log('search called from button');
   searchGif(document.getElementsByName("search")[0].value, 60, true);
 })
 /*check if something was typed in the search bar*/
 document.getElementById("search").addEventListener("keyup", function () {
-  console.log('search called from button');
   searchGif(document.getElementsByName("search")[0].value, 60, true);
 })
 
@@ -202,9 +236,12 @@ document.getElementsByClassName('scrollableArea')[0].onscroll = function () {
   var height = Math.floor(d.scrollHeight - 514);
 
 
-  if (offset >= height+error ) {
-    console.log('search called from height');
-    searchGif(currentKeyword, 60*timesCalled, false);
+  if (offset >= height) {
+    if (currentKeyword !== null){
+    searchGif(currentKeyword, 60 * timesCalled, false);
+    } else {
+      loadTrending(60, false)
+    }
   }
 };
 
