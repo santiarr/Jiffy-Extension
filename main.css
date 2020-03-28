@@ -151,7 +151,7 @@ body::-webkit-scrollbar{
   }
   
   /* Style the search field */
-  form.example input[type=text] {
+  form.search-bar input[type=text] {
     padding: 10px;
     margin-left: 10px;
     font-size: 17px;
@@ -167,7 +167,7 @@ body::-webkit-scrollbar{
  
   
   /* Clear floats */
-  form.example::after {
+  form.search-bar::after {
     content: "";
     clear: both;
     display: table;
