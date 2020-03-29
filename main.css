@@ -145,6 +145,9 @@ body::-webkit-scrollbar{
     
 }
 
+form.search-bar{
+    height: 40px;
+}
 
 * {
     box-sizing: border-box;
@@ -202,6 +205,7 @@ body::-webkit-scrollbar{
     50%{background-position:100% 14%}
     100%{background-position:0% 87%}
 }
+
 
 
 .toggle{
@@ -413,5 +417,188 @@ body::-webkit-scrollbar{
     margin-right: 10px;
     margin-top:10px;
     cursor: pointer;
+}
+
+.opened-content-gif{
+    max-width: 455px;
+    max-height: 406px;
+}
+
+#gif-opened{
+    position: relative;
+    top: -37px;
+    left: 0px;
+    display: flex;
+    flex-direction: column;
+    height: 495px;
+    width: 471.8px;
+    opacity: 1;
+    flex: 1 1 0%;
+    transition: opacity 200ms ease-out 0s;
+    background:#121212;
+}
+
+#opened-gif{
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    flex-direction: column;
+    flex: 1 1 0%;
+    
+}
+.at{
+  font-size: 14px;
+    color: rgb(166, 166, 166);
+    display: flex;
+    align-content: center;
+    text-decoration: none;
+}
+
+#username{
+    display: flex;
+    flex-direction: column;
+    -webkit-box-pack: center;
+    justify-content: center;
+}
+#gif-footer{
+    margin-top: 10px;
+    height: 42px;
+    width: 100%;
+    display: flex;
+    font-weight: bold;
+    flex: 1 1 0%;
+    color: rgb(255, 255, 255);
+    font-family: interface, "Helvetica Neue", helvetica, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    font-size: 15px;
+}
+
+#gif-footer img {
+    width: 42px;
+    height: 42px;
+    margin-right: 8px;
+    
+}
+
+#wrapsidk{
+  margin-top: 10px;
+    display: flex;
+    -webkit-box-pack: end;
+    justify-content: flex-end;
+    -webkit-box-align: center;
+    align-items: center;
+}
+
+#drag-dialogue {
+    display: flex;
+    align-content: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    margin-left: 40px;
+    flex: 1 1 0%;
+    color: rgb(255, 255, 255);
+    font-family: interface, "Helvetica Neue", helvetica, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    font-size: 15px;
+    width: 40.8px;
+}
+
+
+#not-copied{
+    width: 100px;
+    height: 40px;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    font-weight: bold;
+    cursor: pointer;
+    background: rgb(97, 87, 255);
+    color: rgb(255, 255, 255);
+    font-family: interface, "Helvetica Neue", helvetica, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    font-size: 14px;
+
+  }
+
+#not-copied-b{
+  width: 100px;
+  height: 40px;
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  justify-content: center;
+  font-weight: bold;
+  cursor: pointer;
+  background: rgb(97, 87, 255);
+  color: rgb(255, 255, 255);
+  font-family: interface, "Helvetica Neue", helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  font-size: 14px;
+  animation: 800ms ease 0s 1 normal forwards running notCopiedLink;
+}
+
+#copied{
+    width: 100px;
+    height: 40px;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    font-weight: bold;
+    cursor: pointer;
+    background: rgb(97, 87, 255);
+    color: rgb(255, 255, 255);
+    font-family: interface, "Helvetica Neue", helvetica, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    font-size: 14px;
+    animation: 800ms ease 0s 1 normal forwards running copiedLink;
+}
+
+
+
+
+@keyframes copiedLink {
+    0% {background: rgb(97, 87, 255);}
+    
+    100% {
+        color: rgb(18, 18, 18);
+        background: rgb(0, 255, 153);
+    }
+}
+
+@keyframes notCopiedLink {
+    0% {color: rgb(18, 18, 18);
+        background: rgb(0, 255, 153);}
+    
+    100% {
+        color: rgb(255, 255, 255);
+        background: rgb(97, 87, 255);
+    }
+}
+
+
+
+
+#gif-opened-header img{
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+}
+
+#gif-opened-header{
+    display: flex;
+    height: 20px;
+    -webkit-box-align: center;
+    align-items: center;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    width: 469.8px;
+    
 }
 
