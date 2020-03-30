@@ -630,8 +630,10 @@ document.addEventListener('click', function () {
     } else if (event.target.id==="remove-content"){
       storage.remove(key);
       exit()
+      savedClicked()
       displaySaved()
       renderSaved(contentToSave)
+      
     }
   }
 });
