@@ -11,8 +11,7 @@ let currentPage = 0;
 let gifOpened = false;
 let toggleInnerHTML = '';
 let itemKey = '';
-
-
+let notinsaved = true;
 
 loadTrending(60, false);
 
@@ -228,6 +227,13 @@ function gifClicked() {
   currentPage = 0;
   if (!document.getElementById('toggle')){
     addElement('toggle-goes-here', 'div', 'toggle', 'toggle', '455', toggleInnerHTML)
+    document.getElementsByClassName('toggle-text')[0].addEventListener('click', function () { if (!gifOpened) { toggleClicked(0) } });
+  document.getElementsByClassName('toggle-text')[1].addEventListener('click', function () { if (!gifOpened) { toggleClicked(1) } });
+  document.getElementsByClassName('toggle-text')[2].addEventListener('click', function () { if (!gifOpened) { toggleClicked(2) } });
+  document.getElementsByClassName('toggle-text')[3].addEventListener('click', function () { if (!gifOpened) { toggleClicked(3) } });
+  document.getElementsByClassName('toggle-text')[4].addEventListener('click', function () { if (!gifOpened) { toggleClicked(4) } });
+  document.getElementsByClassName('toggle-text')[5].addEventListener('click', function () { if (!gifOpened) { toggleClicked(5) } });
+  document.getElementsByClassName('arrow-svg')[0].addEventListener('click', toggleAnimation);
     }
 
   document.getElementById('gifs-grid2').style.width=155;
@@ -243,8 +249,16 @@ function gifClicked() {
 
 function stickersClicked() {
   currentPage = 1;
+  notinsaved = true;
   if (!document.getElementById('toggle')){
   addElement('toggle-goes-here', 'div', 'toggle', 'toggle', '455', toggleInnerHTML)
+  document.getElementsByClassName('toggle-text')[0].addEventListener('click', function () { if (!gifOpened) { toggleClicked(0) } });
+  document.getElementsByClassName('toggle-text')[1].addEventListener('click', function () { if (!gifOpened) { toggleClicked(1) } });
+  document.getElementsByClassName('toggle-text')[2].addEventListener('click', function () { if (!gifOpened) { toggleClicked(2) } });
+  document.getElementsByClassName('toggle-text')[3].addEventListener('click', function () { if (!gifOpened) { toggleClicked(3) } });
+  document.getElementsByClassName('toggle-text')[4].addEventListener('click', function () { if (!gifOpened) { toggleClicked(4) } });
+  document.getElementsByClassName('toggle-text')[5].addEventListener('click', function () { if (!gifOpened) { toggleClicked(5) } });
+  document.getElementsByClassName('arrow-svg')[0].addEventListener('click', toggleAnimation);
   }
   document.getElementById('gifs-grid2').style.width=155;
   document.getElementById('gifs-grid3').style.width=155;
@@ -258,6 +272,7 @@ function stickersClicked() {
 
 function savedClicked() {
   currentPage = 2;
+  notinsaved = false;
   /* Turn text green and render green rectangle.*/
   document.getElementById('saved-text').innerHTML = '<strong   id="saved" style="height:40px; color: #00ff99;">Saved</strong><div class="clicked" id="saved"></div>';
   /*Unclick elements, turn the rest of the text grey, unrender rectangles*/
@@ -267,6 +282,7 @@ function savedClicked() {
 }
 
 async function searchGif(keyword, limit, clear) {
+  notinsaved = true;
   let searchUrl = `https://api.giphy.com/v1/gifs/search?api_key=tJWi8tEPTSzGXx9YJZqiXT9QFc5M0wsS&q=${keyword}&limit=${limit}&offset=0&rating=R&lang=en`
   let result = await fetch(searchUrl);
   let jsonResult = await result.json();
@@ -632,6 +648,7 @@ document.addEventListener('click', function () {
       exit()
       savedClicked()
       displaySaved()
+      notinsaved = false;
       renderSaved(contentToSave)
       
     }
@@ -705,6 +722,16 @@ function exit() {
   document.getElementsByClassName('toggle-text')[5].addEventListener('click', function () { if (!gifOpened) { toggleClicked(5) } });
   document.getElementsByClassName('arrow-svg')[0].addEventListener('click', toggleAnimation);
   }
+  if (notinsaved){
+    document.getElementsByClassName('toggle-text')[0].addEventListener('click', function () { if (!gifOpened) { toggleClicked(0) } });
+  document.getElementsByClassName('toggle-text')[1].addEventListener('click', function () { if (!gifOpened) { toggleClicked(1) } });
+  document.getElementsByClassName('toggle-text')[2].addEventListener('click', function () { if (!gifOpened) { toggleClicked(2) } });
+  document.getElementsByClassName('toggle-text')[3].addEventListener('click', function () { if (!gifOpened) { toggleClicked(3) } });
+  document.getElementsByClassName('toggle-text')[4].addEventListener('click', function () { if (!gifOpened) { toggleClicked(4) } });
+  document.getElementsByClassName('toggle-text')[5].addEventListener('click', function () { if (!gifOpened) { toggleClicked(5) } });
+  document.getElementsByClassName('arrow-svg')[0].addEventListener('click', toggleAnimation);
+  }
+  
   document.getElementById('content-opened').innerHTML = '';
 
 }
