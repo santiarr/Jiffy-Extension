@@ -686,7 +686,7 @@ function displayGif(url) {
 <a id="a-tag" href=${event.target.classList[2]} class = "opened-content-gif" style="${document.getElementById('stickers-text').firstElementChild.style.color !== "rgb(0, 255, 153)" ? 'background-color: rgb(16,16,16);' : 'background-image: url(static/transparent.PNG);'}"><img id="these-dimensions" class="opened-content-gif" src=${event.target.classList[1]}>
     </a>
   </div>
-  <div id='wrapsidk' style="${event.target.getAttribute('data-display')  !== 'nothing' && document.getElementById('saved-text').firstElementChild.style.color === "rgb(0, 255, 153)" ? ' margin-top: 550px; position: absolute; width: 99%;' : 'width: 99%; margin-top: 550px; position: absolute; width: 98%;'}" style="${document.getElementById('saved-text').firstElementChild.style.color === "rgb(0, 255, 153)" ? 'margin-top: 550px; position: absolute;' : ""}"> 
+  <div id='wrapsidk' style="${document.getElementById('saved-text').firstElementChild.style.color === "rgb(0, 255, 153)" ? ' margin-top: 550px; position: absolute; width: 99%;' : 'margin-top: 0px; position:relative; width: 99%;'}"> 
     <div id="gif-footer">
       <img src=${event.target.getAttribute('data-avatar-url') !== 'nothing' ? event.target.getAttribute('data-avatar-url') : 'static/none.png'}>  
       <div id="username">
