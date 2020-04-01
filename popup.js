@@ -397,6 +397,7 @@ document.getElementById("searchGifs").addEventListener("click", function () {
 })
 /*check if something was typed in the search bar*/
 document.getElementById("search").addEventListener("keyup", function () {
+  if (document.getElementById('saved-text').firstElementChild.style.color !== "rgb(0, 255, 153)"){
   document.getElementById('gifs-grid2').style.width = 155;
   document.getElementById('gifs-grid3').style.width = 155;
   console.log('currentpage is : ' + currentPage)
@@ -414,8 +415,8 @@ document.getElementById("search").addEventListener("keyup", function () {
   } else if (currentPage === 1) {
     searchSticker(document.getElementsByName("search")[0].value, 60, true);
   }
+}
 })
-
 /* Check if user scrolled to the bottom*/
 document.getElementsByClassName('scrollableArea')[0].onscroll = function () {
   var d = document.getElementsByClassName('scrollableArea')[0]
