@@ -13,12 +13,14 @@ let toggleInnerHTML = '';
 let itemKey = '';
 let notinsaved = true;
 
+// Load Trending Page Gifs 
 loadTrending(60, false);
 
-/*This function gets called when a toggle choice gets clicked*/
+// This function gets called when a toggle choice gets clicked
 
 function toggleClicked(place) {
-  /*unclick all elements*/
+
+  // Check What Toggle Page We're In - Gifs 
   if (currentPage === 0) {
     if (place === 0 && (document.getElementById("first-not-clicked").innerHTML === "Trending" || document.getElementById("first-clicked").innerHTML === "Trending")) {
       loadTrending(60, true);
@@ -39,6 +41,7 @@ function toggleClicked(place) {
       searchGif(document.getElementById('sixth-not-clicked').innerHTML, 60, true);
     }
   }
+  // Check What Toggle Place We're In - Stickers 
   else if (currentPage === 1) {
     if (place === 0 && (document.getElementById("first-not-clicked").innerHTML === "Trending" || document.getElementById("first-clicked").innerHTML === "Trending")) {
       loadTrendingSticker(60, true);
@@ -59,13 +62,11 @@ function toggleClicked(place) {
       searchSticker(document.getElementById('sixth-not-clicked').innerHTML, 60, true);
     }
   }
-  else if (currentPage === 2) {
-    /*do nothing YET */
-  }
+  // Unclick All Elements
   for (var i = 0; i < 6; i++) {
     document.getElementsByClassName('toggle-text')[i].id = unclickedPlaces[i]
   }
-  /*Click element*/
+  // Click Element
   document.getElementsByClassName('toggle-text')[place].id = clickedPlaces[place]
   if (document.getElementsByClassName('arrow-svg')[0].id === 'right') {
     homeNextSelected = place;
@@ -73,7 +74,7 @@ function toggleClicked(place) {
     nextTextSelected = place;
   }
 }
-
+// Trending Endpoint API 
 async function loadTrending(limit, clear) {
   let searchUrl = `https://api.giphy.com/v1/gifs/trending?api_key=x01GDnDrRCOp9kXRPTeazB7wqCyeB5Sq&limit=${limit}&rating=R`
   let result = await fetch(searchUrl);
@@ -81,26 +82,26 @@ async function loadTrending(limit, clear) {
   renderTrending(jsonResult, clear)
 }
 
-/*This function gets called when the toggle arrow is clicked*/
+//This function gets called when the toggle arrow is clicked
 
 function toggleAnimation() {
   let direction = document.getElementsByClassName('arrow-svg')[0].id;
   var toggleTexts = document.querySelectorAll(".toggle-text");
   var textsbe = document.getElementsByClassName('toggle-text');
 
-  /*Checks which way the arrow is facing*/
+  // Checks If Arrow Is Facing Left 
   if (direction === 'left') {
     for (text in textsbe) {
-      /*makes sure that the text value is not the string 'length' but is actually a number*/
+      // makes sure that the text value is not the string 'length' but is actually a number
       if (text !== 'length') {
-        /*unclick elements*/
+        // Unclick Elements
         textsbe[text].id = unclickedPlaces[text];
-        /*Changes the toggle text to the home toggle text*/
+        // Changes the Next toggle text to the home toggle text
         textsbe[text].innerHTML = homeTexts[text];
       }
     }
 
-
+    // Toggle Fade In 
     for (var i = 0; i < 6; i++) {
       var toggleText = toggleTexts[i];
 
@@ -114,17 +115,22 @@ function toggleAnimation() {
         opacity: 1,
         transform: "translate3d(" + 0 + "px, 0px, 0px)"
       }];
-
+    // Toggle Animation Properties
       toggleText.animProps = {
+        // Toggle Animation Delay
         duration: 1000 + 10 * i,
+        // Smooth Animation 
         easing: "ease-out",
+        // How many times run 
         iterations: 1
       }
-
+      // Plays Animation 
       var animationPlayer = toggleText.animate(toggleText.keyframes, toggleText.animProps);
+      // Changes Arrow Direction to Right 
       document.getElementsByClassName('arrow-svg')[0].id = 'right'
+      // Highlights Toggle Element We Were Last On
       textsbe[homeNextSelected].id = clickedPlaces[homeNextSelected];
-
+      // Load Gifs When Toggle Clicked 
       if (currentPage === 0) {
         if (homeNextSelected === 0) {
           loadTrending(60, true);
@@ -139,7 +145,7 @@ function toggleAnimation() {
         } else if (homeNextSelected === 5) {
           searchGif(document.getElementById('sixth-clicked').innerHTML, 60, true);
         }
-
+        // Load Stickers when Toggle Clicked 
       } else if (currentPage === 1) {
         if (homeNextSelected === 0) {
           loadTrendingSticker(60, true);
@@ -156,10 +162,14 @@ function toggleAnimation() {
         }
       }
     }
+    // Checks If Arrow If Facing Right 
   } else if (direction == 'right') {
     for (text in textsbe) {
+      // Makes sure that the text value is not the string 'length' but is actually a number
       if (text !== 'length') {
+      // Unclick All Elements 
         textsbe[text].id = unclickedPlaces[text];
+      //Changes the Home toggle text to the Next toggle text
         textsbe[text].innerHTML = nextTexts[text];
       }
     }
@@ -177,18 +187,23 @@ function toggleAnimation() {
         opacity: 1,
         transform: "translate3d(" + 0 + "px, 0px, 0px)"
       }];
-
+      // Toggle Animation Properties 
       toggleText.animProps = {
+        // Toggle Animation Delay
         duration: 1000 + 10 * i,
+        // Smooth Transition 
         easing: "ease-out",
+        // How Many Times Run
         iterations: 1
       }
-
+      // Plays Animation 
       var animationPlayer = toggleText.animate(toggleText.keyframes, toggleText.animProps);
     }
+    // Changes Arrow Direction to Left 
     document.getElementsByClassName('arrow-svg')[0].id = 'left'
+    // Highlights Previous Selected Toggle
     textsbe[nextTextSelected].id = clickedPlaces[nextTextSelected];
-
+    // Display Gifs Using Toggles in Next 
     if (currentPage === 0) {
       if (nextTextSelected === 0) {
         searchGif(document.getElementById('first-clicked').innerHTML, 60, true)
@@ -203,6 +218,7 @@ function toggleAnimation() {
       } else if (nextTextSelected === 5) {
         searchGif(document.getElementById('sixth-clicked').innerHTML, 60, true);
       }
+      // Display Stickers Using Toggles in Next 
     } else if (currentPage === 1) {
       if (nextTextSelected === 0) {
         searchSticker(document.getElementById('first-clicked').innerHTML, 60, true)
@@ -218,15 +234,17 @@ function toggleAnimation() {
         searchSticker(document.getElementById('sixth-clicked').innerHTML, 60, true);
       }
     }
+    // Hide Undefined 
     textsbe[5].innerHTML = `<div class='no-select' style="color: #121212"> ${nextTexts[6]}<div>`
   }
 
 }
-
 function gifClicked() {
   currentPage = 0;
+  // Checks If There's Not a Toggle 
   if (!document.getElementById('toggle')) {
     addElement('toggle-goes-here', 'div', 'toggle', 'toggle', '455', toggleInnerHTML)
+    // Check if Toggle Is Clicked 
     document.getElementsByClassName('toggle-text')[0].addEventListener('click', function () { if (!gifOpened) { toggleClicked(0) } });
     document.getElementsByClassName('toggle-text')[1].addEventListener('click', function () { if (!gifOpened) { toggleClicked(1) } });
     document.getElementsByClassName('toggle-text')[2].addEventListener('click', function () { if (!gifOpened) { toggleClicked(2) } });
@@ -235,13 +253,13 @@ function gifClicked() {
     document.getElementsByClassName('toggle-text')[5].addEventListener('click', function () { if (!gifOpened) { toggleClicked(5) } });
     document.getElementsByClassName('arrow-svg')[0].addEventListener('click', toggleAnimation);
   }
-
+  // Put Back Width
   document.getElementById('gifs-grid2').style.width = 155;
   document.getElementById('gifs-grid3').style.width = 155;
 
-  /* Turn text 'GIFs'green and render green rectangle.*/
+  // Turn text 'GIFs'green and render green rectangle.
   document.getElementById('gifs-text').innerHTML = '<strong style="height:40px; color: #00ff99;">GIFs</strong><div class="clicked" id="gifs"></div>';
-  /*Unclick elements, turn the rest of the text grey, unrender rectangles*/
+  // Unclick elements, turn the rest of the text grey, unrender rectangles 
   document.getElementById('stickers-text').innerHTML = '<strong style="height:40px; color: ##a6a6a6;">Stickers</strong><div class="not-clicked" id="stickers"></div>';
   document.getElementById('saved-text').innerHTML = '<strong  id="saved" style="height:40px; color: ##a6a6a6;">Saved</strong><div class="not-clicked" id="saved"></div>';
 
@@ -250,8 +268,10 @@ function gifClicked() {
 function stickersClicked() {
   currentPage = 1;
   notinsaved = true;
+  // Checks If There's No Toggle 
   if (!document.getElementById('toggle')) {
     addElement('toggle-goes-here', 'div', 'toggle', 'toggle', '455', toggleInnerHTML)
+    // Checks If Toggle Is Clicked 
     document.getElementsByClassName('toggle-text')[0].addEventListener('click', function () { if (!gifOpened) { toggleClicked(0) } });
     document.getElementsByClassName('toggle-text')[1].addEventListener('click', function () { if (!gifOpened) { toggleClicked(1) } });
     document.getElementsByClassName('toggle-text')[2].addEventListener('click', function () { if (!gifOpened) { toggleClicked(2) } });
@@ -260,11 +280,12 @@ function stickersClicked() {
     document.getElementsByClassName('toggle-text')[5].addEventListener('click', function () { if (!gifOpened) { toggleClicked(5) } });
     document.getElementsByClassName('arrow-svg')[0].addEventListener('click', toggleAnimation);
   }
+  // Puts Back Width 
   document.getElementById('gifs-grid2').style.width = 155;
   document.getElementById('gifs-grid3').style.width = 155;
-  /* Turn text green and render green rectangle.*/
+  // Turn text green and render green rectangle.
   document.getElementById('stickers-text').innerHTML = '<strong style="height:40px; color: #00ff99;">Stickers</strong><div class="clicked" id="stickers"></div>';
-  /*Unclick elements, turn the rest of the text grey, unrender rectangles*/
+  // Unclick elements, turn the rest of the text grey, unrender rectangles
   document.getElementById('gifs-text').innerHTML = '<strong style="height:40px; color: ##a6a6a6;">GIFs</strong><div class="not-clicked" id="gifs"></div>';
   document.getElementById('saved-text').innerHTML = '<strong  id="saved" style="height:40px; color: ##a6a6a6;">Saved</strong><div class="not-clicked" id="saved";></div>';
 
@@ -273,14 +294,15 @@ function stickersClicked() {
 function savedClicked() {
   currentPage = 2;
   notinsaved = false;
-  /* Turn text green and render green rectangle.*/
+  // Turn text green and render green rectangle.
   document.getElementById('saved-text').innerHTML = '<strong   id="saved" style="height:40px; color: #00ff99;">Saved</strong><div class="clicked" id="saved"></div>';
-  /*Unclick elements, turn the rest of the text grey, unrender rectangles*/
+  // Unclick elements, turn the rest of the text grey, unrender rectangles
   document.getElementById('stickers-text').innerHTML = '<strong style="height:40px; color: ##a6a6a6;">Stickers</strong><div class="not-clicked" id="stickers"></div>';
   document.getElementById('gifs-text').innerHTML = '<strong style="height:40px; color: ##a6a6a6;">GIFs</strong><div class="not-clicked" id ="gifs"></div>';
 
 }
 
+// Search Endpoint API 
 async function searchGif(keyword, limit, clear) {
   notinsaved = true;
   let searchUrl = `https://api.giphy.com/v1/gifs/search?api_key=tJWi8tEPTSzGXx9YJZqiXT9QFc5M0wsS&q=${keyword}&limit=${limit}&offset=0&rating=R&lang=en`
@@ -289,26 +311,26 @@ async function searchGif(keyword, limit, clear) {
   renderImage(jsonResult, clear, keyword)
 }
 
-
-
+// Display Searched Gifs Inside Scrollable Area 
 var base = 0;
 function renderImage(imageData, clear, keyword) {
 
   let offSet = 20;
-
+  // Clears Old Gifs
   if (clear === true) {
     document.getElementsByClassName('scrollableArea')[0].innerHTML = '<div class="main-container"><div class="container" id="gifs-grid"></div><div class="container2" id="gifs-grid2"></div><div class="container3" id="gifs-grid3"></div>'
     timesCalled = 1;
     base = 0;
     currentKeyword = keyword;
   }
+  // Insert New Searched Gifs Into First Column
   for (var i = base; i < base + offSet; i++) {
     document.getElementById('gifs-grid').innerHTML += `<div class="gif">
   <img data-is-verified = "${imageData.data[i].user ? imageData.data[i].user.is_verified : 'nothing'}" data-avatar-url = "${imageData.data[i].user ? imageData.data[i].user.avatar_url : 'nothing'}" data-user-url = "${imageData.data[i].user ? imageData.data[i].user.profile_url : 'nothing'}" data-username = "${imageData.data[i].user ? imageData.data[i].user.username : 'nothing'}" data-display = "${imageData.data[i].user ? imageData.data[i].user.display_name : 'nothing'}"   class='giphy-image ${imageData.data[i].images.original.url} ${imageData.data[i].bitly_gif_url}' id=${i} src=${imageData.data[i].images.fixed_height_downsampled.url} width="145" ></div>`
 
 
   }
-
+// Insert New Searched Gifs Into Second Column
   base += offSet
   for (var i = base; i < base + offSet; i++) {
     document.getElementById('gifs-grid2').innerHTML += `<div class="gif">
@@ -316,6 +338,7 @@ function renderImage(imageData, clear, keyword) {
 
 
   }
+  // Insert New Searched Gifs Into Third Column 
   base += offSet
   for (var i = base; i < base + offSet; i++) {
     document.getElementById('gifs-grid3').innerHTML += `<div class="gif">
@@ -323,22 +346,23 @@ function renderImage(imageData, clear, keyword) {
 
 
   }
+  // Adds 20 New Gifs on Each Column
   base += offSet
-  timesCalled += 1;
+  timesCalled ++;
 
 }
 
 
 function renderSaved() {
-
+  // Clears Current Gifs
   document.getElementsByClassName('scrollableArea')[0].innerHTML = '<div class="main-container"><div class="container" style=" align-content: flex-start; width:auto; max-width: 465px;flex-direction: row; flex-wrap: wrap;" id="gifs-grid"></div><div class="container2" id="gifs-grid2"></div><div class="container3" id="gifs-grid3"></div>'
-
+  // Changes Width to 0 
   document.getElementById('gifs-grid2').style.width = 0;
   document.getElementById('gifs-grid3').style.width = 0;
-
+  // Gets Saved Gifs From Chrome Storage 
   chrome.storage.sync.get(null, function (result) {
     savedGifs = Object.values(result)
-
+    // Places Gifs Inside the Gif 
     for (var i = 0; i < savedGifs.length; i++) {
       document.getElementById('gifs-grid').innerHTML += `<div ${savedGifs[i].includes('sticker') ? "style='background-image:url(static/transparent.PNG);'" : ''} class="gif">${savedGifs[i]}</div>`
     }
@@ -348,41 +372,44 @@ function renderSaved() {
 
 }
 
-
+// Display Trending Gifs in Scrollable Area
 function renderTrending(imageData, clear) {
 
   let offSet = 20;
-
+// Clears Old Gifs in Scrollable Area 
   if (clear === true) {
     document.getElementsByClassName('scrollableArea')[0].innerHTML = '<div class="main-container"><div class="container" id="gifs-grid"></div><div class="container2" id="gifs-grid2"></div><div class="container3" id="gifs-grid3"></div>'
     timesCalled = 1;
     base = 0;
     currentKeyword = null;
   }
-
+// Display 20 Trending Gifs In First Column 
   for (var i = base; i < base + offSet; i++) {
     document.getElementById('gifs-grid').innerHTML += `<div class="gif">
   <img data-is-verified = "${imageData.data[i].user ? imageData.data[i].user.is_verified : 'nothing'}" data-avatar-url = "${imageData.data[i].user ? imageData.data[i].user.avatar_url : 'nothing'}" data-user-url = "${imageData.data[i].user ? imageData.data[i].user.profile_url : 'nothing'}" data-username = "${imageData.data[i].user ? imageData.data[i].user.username : 'nothing'}" data-display = "${imageData.data[i].user ? imageData.data[i].user.display_name : 'nothing'}"   class='giphy-image ${imageData.data[i].images.original.url} ${imageData.data[i].bitly_gif_url}' id=${i} src=${imageData.data[i].images.fixed_height_downsampled.url} width="145" ></div>`
 
   }
+  //Display 20 Trending Gifs In Second Column 
   base += offSet
   for (var i = base; i < base + offSet; i++) {
     document.getElementById('gifs-grid2').innerHTML += `<div class="gif">
     <img data-is-verified = "${imageData.data[i].user ? imageData.data[i].user.is_verified : 'nothing'}" data-avatar-url = "${imageData.data[i].user ? imageData.data[i].user.avatar_url : 'nothing'}" data-user-url = "${imageData.data[i].user ? imageData.data[i].user.profile_url : 'nothing'}" data-username = "${imageData.data[i].user ? imageData.data[i].user.username : 'nothing'}" data-display = "${imageData.data[i].user ? imageData.data[i].user.display_name : 'nothing'}"    class='giphy-image ${imageData.data[i].images.original.url} ${imageData.data[i].bitly_gif_url}' id=${i} src=${imageData.data[i].images.fixed_height_downsampled.url} width="145">  </div>`
 
   }
+  //Display 20 Trending Gifs in Third Column 
   base += offSet
   for (var i = base; i < base + offSet; i++) {
     document.getElementById('gifs-grid3').innerHTML += `<div class="gif">
   <img data-is-verified = "${imageData.data[i].user ? imageData.data[i].user.is_verified : 'nothing'}" data-avatar-url = "${imageData.data[i].user ? imageData.data[i].user.avatar_url : 'nothing'}" data-user-url = "${imageData.data[i].user ? imageData.data[i].user.profile_url : 'nothing'}" data-username = "${imageData.data[i].user ? imageData.data[i].user.username : 'nothing'}" data-display = "${imageData.data[i].user ? imageData.data[i].user.display_name : 'nothing'}"    class='giphy-image ${imageData.data[i].images.original.url} ${imageData.data[i].bitly_gif_url}' id=${i} src=${imageData.data[i].images.fixed_height_downsampled.url} width="145" > </div>`
 
   }
+  //Display 20 Gifs in Columns
   base += offSet
   timesCalled += 1;
 
 }
 
-/*check if search button was clicked*/
+// Check if search button was clicked
 document.getElementById("searchGifs").addEventListener("click", function () {
   document.getElementById('content-opened').innerHTML = '';
   addElement('toggle-goes-here', 'div', 'toggle', 'toggle', '455', toggleInnerHTML)
@@ -417,7 +444,7 @@ document.getElementById("search").addEventListener("keyup", function () {
   }
 }
 })
-/* Check if user scrolled to the bottom*/
+// Check if user scrolled to bottom 
 document.getElementsByClassName('scrollableArea')[0].onscroll = function () {
   var d = document.getElementsByClassName('scrollableArea')[0]
   var offset = Math.floor(d.scrollTop);
@@ -427,27 +454,32 @@ document.getElementsByClassName('scrollableArea')[0].onscroll = function () {
   if (offset >= height) {
     if (currentKeyword !== null) {
       if (currentPage == 0) {
+        //Load 60 more Gifs when Scrolled to Bottom OF keyword 
         searchGif(currentKeyword, 60 * timesCalled, false);
       } else if (currentPage == 1) {
+        //Load 60 more Stickers when Scrolled to Bottom OF keyword 
         searchSticker(currentKeyword, 60 * timesCalled, false);
       }
     } else {
       if (currentPage == 0) {
+        // Load 60 more trending Gifs when Scrolled to the Bottom 
         loadTrending(60, false);
       } else if (currentPage == 1) {
+        // Load 60 more trending Stickers when Scrolled to the Bottom 
         loadTrendingSticker(60, false);
       }
     }
   }
 };
 
+// Search Sticker Endpoint API
 async function searchSticker(keyword, limit, clear) {
   let searchUrl = `https://api.giphy.com/v1/stickers/search?api_key=x01GDnDrRCOp9kXRPTeazB7wqCyeB5Sq&q=${keyword}&limit=${limit}&offset=0&rating=R&lang=en`
   let result = await fetch(searchUrl);
   let jsonResult = await result.json();
   renderSticker(jsonResult, clear, keyword)
 }
-
+// Search Trending Sticket Endpoint API
 async function loadTrendingSticker(limit, clear) {
   let searchUrl = `https://api.giphy.com/v1/stickers/trending?api_key=x01GDnDrRCOp9kXRPTeazB7wqCyeB5Sq&limit=${limit}&rating=R`
   let result = await fetch(searchUrl);
@@ -455,72 +487,78 @@ async function loadTrendingSticker(limit, clear) {
   renderTrendingSticker(jsonResult, clear)
 }
 
-
+// Display Stickers in Scrollable Area 
 function renderSticker(imageData, clear, keyword) {
 
   let offSet = 20;
-
+// Clear old Stickers 
   if (clear === true) {
     document.getElementsByClassName('scrollableArea')[0].innerHTML = '<div class="main-container"><div class="container" id="gifs-grid"></div><div class="container2" id="gifs-grid2"></div><div class="container3" id="gifs-grid3"></div>'
     timesCalled = 1;
     base = 0;
     currentKeyword = keyword;
   }
+  // Add 20 Stickers to First Column 
   for (var i = base; i < base + offSet; i++) {
     document.getElementById('gifs-grid').innerHTML += `<div class="gif" style="background-image: url(static/transparent.PNG);" > <div style="background-image: url(static/transparent.PNG);">
 <img data-type="sticker" data-is-verified = "${imageData.data[i].user ? imageData.data[i].user.is_verified : 'nothing'}" data-avatar-url = "${imageData.data[i].user ? imageData.data[i].user.avatar_url : 'nothing'}" data-user-url = "${imageData.data[i].user ? imageData.data[i].user.profile_url : 'nothing'}" data-username = "${imageData.data[i].user ? imageData.data[i].user.username : 'nothing'}" data-display = "${imageData.data[i].user ? imageData.data[i].user.display_name : 'nothing'}"   class='giphy-image ${imageData.data[i].images.original.url} ${imageData.data[i].bitly_gif_url}' id=${i} src=${imageData.data[i].images.fixed_height_downsampled.url} width="145" ></div>`
   }
+  // Add 20 Stickers to Second Column 
   base += offSet
   for (var i = base; i < base + offSet; i++) {
     document.getElementById('gifs-grid2').innerHTML += `<div class="gif" style="background-image: url(static/transparent.PNG);" > 
 <img data-type="sticker" data-is-verified = "${imageData.data[i].user ? imageData.data[i].user.is_verified : 'nothing'}" data-avatar-url = "${imageData.data[i].user ? imageData.data[i].user.avatar_url : 'nothing'}" data-user-url = "${imageData.data[i].user ? imageData.data[i].user.profile_url : 'nothing'}" data-username = "${imageData.data[i].user ? imageData.data[i].user.username : 'nothing'}" data-display = "${imageData.data[i].user ? imageData.data[i].user.display_name : 'nothing'}"   class='giphy-image ${imageData.data[i].images.original.url} ${imageData.data[i].bitly_gif_url}' id=${i} src=${imageData.data[i].images.fixed_height_downsampled.url} width="145">  </div>`
 
   }
+  // Add 20 Stickers to second Column 
   base += offSet
   for (var i = base; i < base + offSet; i++) {
     document.getElementById('gifs-grid3').innerHTML += `<div class="gif" style="background-image: url(static/transparent.PNG);" >
 <img data-type="sticker"  data-is-verified = "${imageData.data[i].user ? imageData.data[i].user.is_verified : 'nothing'}" data-avatar-url = "${imageData.data[i].user ? imageData.data[i].user.avatar_url : 'nothing'}" data-user-url = "${imageData.data[i].user ? imageData.data[i].user.profile_url : 'nothing'}" data-username = "${imageData.data[i].user ? imageData.data[i].user.username : 'nothing'}" data-display = "${imageData.data[i].user ? imageData.data[i].user.display_name : 'nothing'}"   class='giphy-image ${imageData.data[i].images.original.url} ${imageData.data[i].bitly_gif_url}' id=${i} src=${imageData.data[i].images.fixed_height_downsampled.url} width="145" ></div>`
 
   }
+  // Add 60 Gifs in Columns 
   base += offSet
   timesCalled += 1;
 
 }
-
+// Display Trending Stickers in Scrollable Area 
 function renderTrendingSticker(imageData, clear) {
 
   let offSet = 20;
-
+  // Clear Old Gifs in Scrollable Area 
   if (clear === true) {
     document.getElementsByClassName('scrollableArea')[0].innerHTML = '<div class="main-container"><div class="container" id="gifs-grid"></div><div class="container2" id="gifs-grid2"></div><div class="container3" id="gifs-grid3"></div>'
     timesCalled = 1;
     base = 0;
     currentKeyword = null;
   }
-
+  // Display 20 Trending Stickers in First Column 
   for (var i = base; i < base + offSet; i++) {
     document.getElementById('gifs-grid').innerHTML += `<div class="gif" style="background-image: url(static/transparent.PNG);"> <div style="background-image: url(static/transparent.PNG);">
   <img data-type="sticker" data-is-verified = "${imageData.data[i].user ? imageData.data[i].user.is_verified : 'nothing'}" data-avatar-url = "${imageData.data[i].user ? imageData.data[i].user.avatar_url : 'nothing'}" data-user-url = "${imageData.data[i].user ? imageData.data[i].user.profile_url : 'nothing'}" data-username = "${imageData.data[i].user ? imageData.data[i].user.username : 'nothing'}" data-display = "${imageData.data[i].user ? imageData.data[i].user.display_name : 'nothing'}"  class='giphy-image ${imageData.data[i].images.original.url} ${imageData.data[i].bitly_gif_url}' id=${i} src=${imageData.data[i].images.fixed_height_downsampled.url} width="145"></div>`
-
   }
+  // Display 20 Trending Stickers in Second Column 
   base += offSet
   for (var i = base; i < base + offSet; i++) {
     document.getElementById('gifs-grid2').innerHTML += `<div class="gif" style="background-image: url(static/transparent.PNG);" ><div style="background-image: url(static/transparent.PNG);">
   <img data-type="sticker" data-is-verified = "${imageData.data[i].user ? imageData.data[i].user.is_verified : 'nothing'}" data-avatar-url = "${imageData.data[i].user ? imageData.data[i].user.avatar_url : 'nothing'}" data-user-url = "${imageData.data[i].user ? imageData.data[i].user.profile_url : 'nothing'}" data-username = "${imageData.data[i].user ? imageData.data[i].user.username : 'nothing'}" data-display = "${imageData.data[i].user ? imageData.data[i].user.display_name : 'nothing'}"   class='giphy-image ${imageData.data[i].images.original.url} ${imageData.data[i].bitly_gif_url}' id=${i} src=${imageData.data[i].images.fixed_height_downsampled.url} width="145"></div> `
 
   }
+  // Display 20 Trending Stickers in Third Column 
   base += offSet
   for (var i = base; i < base + offSet; i++) {
     document.getElementById('gifs-grid3').innerHTML += `<div class="gif" style="background-image: url(static/transparent.PNG);"><div style="background-image: url(static/transparent.PNG);">
   <img data-type="sticker" data-is-verified = "${imageData.data[i].user ? imageData.data[i].user.is_verified : 'nothing'}" data-avatar-url = "${imageData.data[i].user ? imageData.data[i].user.avatar_url : 'nothing'}" data-user-url = "${imageData.data[i].user ? imageData.data[i].user.profile_url : 'nothing'}" data-username = "${imageData.data[i].user ? imageData.data[i].user.username : 'nothing'}" data-display = "${imageData.data[i].user ? imageData.data[i].user.display_name : 'nothing'}"   class='giphy-image ${imageData.data[i].images.original.url} ${imageData.data[i].bitly_gif_url}' id=${i} src=${imageData.data[i].images.fixed_height_downsampled.url} width="145" ></div>`
   }
+  // Display 60 Trending Stickers in Columns
   base += offSet
   timesCalled += 1;
 
 }
 
 
-/*Check if navbar elements were clicked*/
+// Check If Toggles & Navbar Element "Gifs" Is clicked 
 document.getElementById('gifs-text').addEventListener('click', function () {
   gifClicked()
   if (document.getElementsByClassName('arrow-svg')[0].id === 'left') {
@@ -537,6 +575,7 @@ document.getElementById('gifs-text').addEventListener('click', function () {
     } else if (nextTextSelected === 5) {
       searchGif(document.getElementById('sixth-clicked').innerHTML, 60, true);
     }
+    // Check If Next Toggles Are Clicked 
   } else if (document.getElementsByClassName('arrow-svg')[0].id === 'right') {
     if (homeNextSelected === 0) {
       loadTrending(60, true);
@@ -553,6 +592,7 @@ document.getElementById('gifs-text').addEventListener('click', function () {
     }
   }
 });
+  //Check if Toggles and Navbar Element "Stickers" is clicked 
 document.getElementById('stickers-text').addEventListener('click', function () {
   stickersClicked()
   if (document.getElementsByClassName('arrow-svg')[0].id === 'left') {
@@ -569,6 +609,7 @@ document.getElementById('stickers-text').addEventListener('click', function () {
     } else if (nextTextSelected === 5) {
       searchSticker(document.getElementById('sixth-clicked').innerHTML, 60, true);
     }
+    // Check if Toggles on Home are Clicked 
   } else if (document.getElementsByClassName('arrow-svg')[0].id === 'right') {
     if (homeNextSelected === 0) {
       loadTrendingSticker(60, true);
@@ -585,10 +626,11 @@ document.getElementById('stickers-text').addEventListener('click', function () {
     }
   }
 });
+// Check if Navbar Element "Saved" Is clicked 
 document.getElementById('saved-text').addEventListener('click', savedClicked);
 
 
-/*Check if toggle elements were clicked*/
+// Check if Toggle Elements are clicked 
 
 document.getElementsByClassName('toggle-text')[0].addEventListener('click', function () { if (!gifOpened) { toggleClicked(0) } });
 document.getElementsByClassName('toggle-text')[1].addEventListener('click', function () { if (!gifOpened) { toggleClicked(1) } });
@@ -597,7 +639,7 @@ document.getElementsByClassName('toggle-text')[3].addEventListener('click', func
 document.getElementsByClassName('toggle-text')[4].addEventListener('click', function () { if (!gifOpened) { toggleClicked(4) } });
 document.getElementsByClassName('toggle-text')[5].addEventListener('click', function () { if (!gifOpened) { toggleClicked(5) } });
 
-
+// Check if Arrow Is Clicked 
 
 document.getElementsByClassName('arrow-svg')[0].addEventListener('click', toggleAnimation);
 
@@ -616,14 +658,14 @@ function addElement(parentId, elementTag, elementId, elementClass, elementWidth,
   var p = document.getElementById(parentId);
   var newElement = document.createElement(elementTag);
   newElement.setAttribute('id', elementId);
-  newElement.setAttribute('class', elementId);
+  newElement.setAttribute('class', elementClass);
   newElement.setAttribute('width', elementWidth);
   newElement.innerHTML = html;
   p.appendChild(newElement);
 }
 
 
-/*Event bubbling !!*/
+// Event Bubbling 
 document.addEventListener('click', function () {
   if (event.target.classList.contains('giphy-image')) {
     displayGif(event.target.src);
@@ -656,7 +698,7 @@ document.addEventListener('click', function () {
   }
 });
 
-
+// Display the Saved tab
 function displaySaved() {
   if (document.getElementById('toggle')) {
     toggleInnerHTML = document.getElementById('toggle').innerHTML;
@@ -664,15 +706,17 @@ function displaySaved() {
   }
 }
 
-
+// What Gif is Being Saved 
 let contentToSave = '';
-let savedcolor = document.getElementById('saved-text').firstElementChild.style.color;
 
+// Display Gif using URL 
 function displayGif(url) {
+  // Removes Toggle 
   if (document.getElementById('toggle')) {
     toggleInnerHTML = document.getElementById('toggle').innerHTML;
     removeElement('toggle');
   }
+  // Sets Content to Save 
   contentToSave = event.target.parentElement.innerHTML
   itemKey = event.target.classList[2];
   document.getElementById('content-opened').innerHTML = `<div ${document.getElementById('saved-text').firstElementChild.style.color === "rgb(0, 255, 153)" ? 'style="height:640px;position: absolute;width: 474.4px;margin-top: 30px;"' : ""}id="gif-opened">
@@ -705,13 +749,13 @@ function displayGif(url) {
 `
 
 
-
+  // Gets link and Sets Width and Height 
   document.getElementById('a-tag').width = document.getElementById('these-dimensions').style.width
   document.getElementById('a-tag').height = document.getElementById('these-dimensions').style.height
 
 }
 
-
+  // Clears and adds Toggles Back 
 function exit() {
   if (document.getElementById('saved-text').firstElementChild.style.color !== "rgb(0, 255, 153)") {
     addElement('toggle-goes-here', 'div', 'toggle', 'toggle', '455', toggleInnerHTML);
@@ -723,6 +767,7 @@ function exit() {
     document.getElementsByClassName('toggle-text')[5].addEventListener('click', function () { if (!gifOpened) { toggleClicked(5) } });
     document.getElementsByClassName('arrow-svg')[0].addEventListener('click', toggleAnimation);
   }
+  // Adds Event Listener 
   if (notinsaved) {
     document.getElementsByClassName('toggle-text')[0].addEventListener('click', function () { if (!gifOpened) { toggleClicked(0) } });
     document.getElementsByClassName('toggle-text')[1].addEventListener('click', function () { if (!gifOpened) { toggleClicked(1) } });
@@ -732,12 +777,12 @@ function exit() {
     document.getElementsByClassName('toggle-text')[5].addEventListener('click', function () { if (!gifOpened) { toggleClicked(5) } });
     document.getElementsByClassName('arrow-svg')[0].addEventListener('click', toggleAnimation);
   }
-
+  // Clear 
   document.getElementById('content-opened').innerHTML = '';
 
 }
 
-
+// Allows For User To Copy Link 
 function copyToClipboard(textToCopy) {
   var button = document.getElementsByClassName('copy-link')[0];
   var textArea = document.createElement("textarea");
@@ -751,6 +796,7 @@ function copyToClipboard(textToCopy) {
   setTimeout(notCopied, 4000);
 }
 
+// Changes Style of Button to purple 
 function notCopied() {
   var button = document.getElementsByClassName('copy-link')[0];
   button.innerHTML = 'Copy Link'
